@@ -1,0 +1,44 @@
+Running: asgn3_1 
+LogicalAggregate(group=[{11}], SALARY=[SUM($9)])
+  LogicalJoin(condition=[=($2, $10)], joinType=[inner])
+    LogicalTableScan(table=[[company, EMPLOYEE]])
+    LogicalTableScan(table=[[company, DEPT]])
+
+Running: asgn3_2
+LogicalProject(NAME0=[$11], NAME=[$1], NAME00=[$13])
+  LogicalFilter(condition=[=($7, $12)])
+    LogicalJoin(condition=[true], joinType=[inner])
+      LogicalTableScan(table=[[company, EMPLOYEE]])
+      LogicalJoin(condition=[=($0, $4)], joinType=[inner])
+        LogicalTableScan(table=[[company, DEPT]])
+        LogicalTableScan(table=[[company, EMPLOYEE]])
+
+Running: asgn3_3
+LogicalSort(sort0=[$1], dir0=[DESC], fetch=[1])
+  LogicalAggregate(group=[{11}], C=[COUNT($0)])
+    LogicalFilter(condition=[=($7, $10)])
+      LogicalJoin(condition=[true], joinType=[inner])
+        LogicalTableScan(table=[[company, EMPLOYEE]])
+        LogicalTableScan(table=[[company, EMPLOYEE]])
+
+Running: asgn3_4
+LogicalProject(TITLE=[$14], NAME=[$1])
+  LogicalFilter(condition=[=($13, $11)])
+    LogicalJoin(condition=[true], joinType=[left])
+      LogicalFilter(condition=[=($0, $10)])
+        LogicalJoin(condition=[true], joinType=[inner])
+          LogicalTableScan(table=[[company, EMPLOYEE]])
+          LogicalTableScan(table=[[company, CERTIFICATE]])
+      LogicalTableScan(table=[[company, COURSE]])
+
+Running: asgn3_5
+LogicalAggregate(group=[{0, 1, 2}])
+  LogicalMinus(all=[false])
+    LogicalProject(EMPID=[$0], NAME=[$1], $f2=[0])
+      LogicalTableScan(table=[[company, EMPLOYEE]])
+    LogicalAggregate(group=[{0, 1, 2}])
+      LogicalProject(EMPID=[$0], NAME=[$1], $f2=[0])
+        LogicalFilter(condition=[=($0, $10)])
+          LogicalJoin(condition=[true], joinType=[inner])
+            LogicalTableScan(table=[[company, EMPLOYEE]])
+            LogicalTableScan(table=[[company, CERTIFICATE]])
